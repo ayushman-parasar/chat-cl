@@ -6,7 +6,7 @@ exports.studentToMentor = async (req, res, next) => {
       messages: req.body.message,
     };
     console.log(req.body.message, "requeest");
-    GlobalSocket.io.emit(`connection`, msg);
+    GlobalSocket.io.emit(`RecieveMessage`, msg);
     res.json({ success: true, msg });
   } catch (error) {
     console.log("error in studentto mentor", error);

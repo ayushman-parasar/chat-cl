@@ -14,36 +14,47 @@ class ChatForm extends React.Component {
         student: true,
         msg: "",
       },
+      allmessages: [],
     };
+    this.addMessage = this.addMessage.bind(this);
   }
   componentDidMount() {
-}
-handleSubmit = (e) => {
+    socket.connect();
+    socket.on("RecieveMessage", (msg) => {
+      this.setState({
+        allmessages: [...this.state.allmessages, msg]
+      })
+    });
+  }
+
+  addMessage = (data) => {
+    this.setState({
+      allmessages: [...this.state.allmessages, data],
+    });
+    console.log(this.state.allmessages, "inside addmessages");
+  };
+
+  handleSubmit = (e) => {
     e.preventDefault();
 
     axios
-    .post("/api/v1/chats", { message: this.state.message })
-    .then((data) => {
+      .post("/api/v1/chats", { message: this.state.message })
+      .then((data) => {
         console.log("data", data);
-        window.location.href="/"
-    });
-};
+      });
+  };
 
-handleChange = (e) => {
+  handleChange = (e) => {
     this.setState({
-        message: {
-            ...this.state.message,
-            msg: e.target.value,
-        },
+      message: {
+        ...this.state.message,
+        msg: e.target.value,
+      },
     });
-};
-render() {
-    socket.connect();
-    socket.on("connection", (msg) => {
-      console.log("socket testing", msg);
-    });
+  };
+  render() {
     return (
-        <>
+      <>
         <form className="msger-inputarea" onSubmit={this.handleSubmit}>
           <input
             type="text"
