@@ -11,7 +11,7 @@
     "axios": "^0.19.2",
     "babel-plugin-emotion": "^10.0.33",
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -30,7 +30,8 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
