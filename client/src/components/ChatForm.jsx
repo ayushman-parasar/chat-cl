@@ -14,25 +14,11 @@ class ChatForm extends React.Component {
         student: true,
         msg: "",
       },
-      allmessages: [],
+      
     };
-    this.addMessage = this.addMessage.bind(this);
   }
-  componentDidMount() {
-    socket.connect();
-    socket.on("RecieveMessage", (msg) => {
-      this.setState({
-        allmessages: [...this.state.allmessages, msg]
-      })
-    });
-  }
-
-  addMessage = (data) => {
-    this.setState({
-      allmessages: [...this.state.allmessages, data],
-    });
-    console.log(this.state.allmessages, "inside addmessages");
-  };
+ 
+  
 
   handleSubmit = (e) => {
     e.preventDefault();

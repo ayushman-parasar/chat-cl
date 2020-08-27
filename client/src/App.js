@@ -1,13 +1,24 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ChatForm from "./components/ChatForm";
+import io from "socket.io-client";
+
+const socket = io();
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      messages: "",
+      allmessages: [],
     };
+  }
+  componentDidMount() {
+    socket.connect();
+    socket.on("RecieveMessage", (msg) => {
+      this.setState({
+        allmessages: [...this.state.allmessages, msg],
+      });
+    });
   }
 
   render() {
