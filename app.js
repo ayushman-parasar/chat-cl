@@ -7,6 +7,7 @@ const expressStaticGzip = require("express-static-gzip");
 var mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
+var chatRouter = require("./routes/chat");
 
 require("dotenv").config();
 
@@ -63,6 +64,7 @@ mongoose.connect(
 );
 
 app.use("/", indexRouter);
+app.use("/api/v1/chats", chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
