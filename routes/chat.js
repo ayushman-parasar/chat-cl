@@ -1,7 +1,12 @@
 const express = require("express");
-const { studentToMentor } = require("../controllers/chat");
+const {
+  studentToMentor,
+  getMessages,
+  studentT,
+} = require("../controllers/chat");
 var router = express.Router();
 
+router.get("/", getMessages);
 router.post("/", studentToMentor);
 
 module.exports = router;

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ChatForm from "./components/ChatForm";
 import io from "socket.io-client";
+import "../../public/stylesheets/style.css";
+import axios from "axios";
 
 const socket = io();
 
@@ -13,6 +15,16 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    // axios.get("/api/v1/chats").then((res) => console.log("axios", res));
+    fetch("/api/v1/chats", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "data");
+      });
     socket.connect();
     socket.on("RecieveMessage", (msg) => {
       this.setState({
@@ -24,53 +36,61 @@ class App extends Component {
   render() {
     return (
       <>
-        <section className="msger">
+        <section className="msger container mt-2">
           <header className="msger-header">
             <div className="msger-header-options"></div>
           </header>
 
           <main className="msger-chat">
-            <div className="msg left-msg">
-              <div
-                className="msg-img"
-                style={{
-                  backgroundImage:
-                    "url(https://image.flaticon.com/icons/svg/327/327779.svg)",
-                }}
-              ></div>
+            {this.state.allmessages.length > 0 ? (
+              this.state.allmessages.map((incMsg, index) => {
+                if (incMsg.student === true) {
+                  return (
+                    <div className="msg left-msg" key={index}>
+                      <div
+                        className="msg-img"
+                        style={{
+                          backgroundImage:
+                            "url(https://image.flaticon.com/icons/svg/327/327779.svg)",
+                        }}
+                      ></div>
 
-              <div className="msg-bubble">
-                <div className="msg-info">
-                  <div className="msg-info-name">BOT</div>
-                  <div className="msg-info-time">12:45</div>
-                </div>
+                      <div className="msg-bubble">
+                        <div className="msg-info">
+                          <div className="msg-info-name">STUDENT</div>
+                          <div className="msg-info-time">12:45</div>
+                        </div>
 
-                <div className="msg-text">
-                  Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
-                </div>
-              </div>
-            </div>
+                        <div className="msg-text">{incMsg.msg}</div>
+                      </div>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="msg right-msg" key={index}>
+                      <div
+                        className="msg-img"
+                        style={{
+                          backgroundImage:
+                            "url(https://image.flaticon.com/icons/svg/145/145867.svg)",
+                        }}
+                      ></div>
 
-            <div className="msg right-msg">
-              <div
-                className="msg-img"
-                style={{
-                  backgroundImage:
-                    "url(https://image.flaticon.com/icons/svg/145/145867.svg)",
-                }}
-              ></div>
+                      <div className="msg-bubble">
+                        <div className="msg-info">
+                          <div className="msg-info-name">Sajad</div>
+                          <div className="msg-info-time">12:46</div>
+                        </div>
 
-              <div className="msg-bubble">
-                <div className="msg-info">
-                  <div className="msg-info-name">Sajad</div>
-                  <div className="msg-info-time">12:46</div>
-                </div>
-
-                <div className="msg-text">
-                  You can change your name in JS section!
-                </div>
-              </div>
-            </div>
+                        <div className="msg-text">{incMsg.msg}</div>
+                      </div>
+                    </div>
+                  );
+                }
+              })
+            ) : (
+              <p>No messages to display</p>
+            )}
           </main>
           <hr />
         </section>

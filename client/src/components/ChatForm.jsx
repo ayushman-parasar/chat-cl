@@ -1,10 +1,6 @@
 import React from "react";
-import "../../../public/stylesheets/style.css";
-// ES6 import
-import io from "socket.io-client";
-import axios from "axios";
 
-const socket = io();
+import axios from "axios";
 
 class ChatForm extends React.Component {
   constructor() {
@@ -14,11 +10,8 @@ class ChatForm extends React.Component {
         student: true,
         msg: "",
       },
-      
     };
   }
- 
-  
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -31,12 +24,21 @@ class ChatForm extends React.Component {
   };
 
   handleChange = (e) => {
-    this.setState({
-      message: {
-        ...this.state.message,
-        msg: e.target.value,
-      },
-    });
+    if (e.target.name === "mentor") {
+      this.setState({
+        message: {
+          student: false,
+          msg: e.target.value,
+        },
+      });
+    } else {
+      this.setState({
+        message: {
+          student: true,
+          msg: e.target.value,
+        },
+      });
+    }
   };
   render() {
     return (
@@ -46,6 +48,19 @@ class ChatForm extends React.Component {
             type="text"
             className="msger-input"
             placeholder="Enter your message..."
+            onChange={this.handleChange}
+          />
+          <button type="submit" className="msger-send-btn">
+            Send
+          </button>
+        </form>
+
+        <form className="msger-inputarea" onSubmit={this.handleSubmit}>
+          <input
+            name="mentor"
+            type="text"
+            className="msger-input"
+            placeholder="Enter your message...mentor"
             onChange={this.handleChange}
           />
           <button type="submit" className="msger-send-btn">
