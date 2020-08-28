@@ -28,9 +28,8 @@ exports.studentToMentor = async (req, res, next) => {
 };
 
 exports.getMessages = async (req, res, next) => {
-  console.log(req);
-  console.log("sdasdsadadksadhj2132139128398219312938129");
   try {
+    console.log("sdasdsadadksadhj2132139128398219312938129");
     let messageArray = await Message.find({});
     console.log(messageArray, "array");
     if (messageArray) {

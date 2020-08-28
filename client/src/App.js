@@ -15,16 +15,20 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    // axios.get("/api/v1/chats").then((res) => console.log("axios", res));
-    fetch("/api/v1/chats", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "data");
+    axios.get("/api/v1/chats").then((res) => {
+      this.setState({
+        allmessages: [...res.data.messages],
       });
+    });
+    // fetch("/api/v1/chats", {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data, "data");
+    //   });
     socket.connect();
     socket.on("RecieveMessage", (msg) => {
       this.setState({
@@ -61,7 +65,9 @@ class App extends Component {
                           <div className="msg-info-time">12:45</div>
                         </div>
 
-                        <div className="msg-text">{incMsg.msg}</div>
+                        <div className="msg-text">
+                          {incMsg.msg || incMsg.content}
+                        </div>
                       </div>
                     </div>
                   );
@@ -82,7 +88,9 @@ class App extends Component {
                           <div className="msg-info-time">12:46</div>
                         </div>
 
-                        <div className="msg-text">{incMsg.msg}</div>
+                        <div className="msg-text">
+                          {incMsg.msg || incMsg.content}
+                        </div>
                       </div>
                     </div>
                   );

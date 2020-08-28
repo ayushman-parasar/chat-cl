@@ -63,8 +63,8 @@ mongoose.connect(
   }
 );
 
-app.use("/", indexRouter);
 app.use("/api/v1/chats", chatRouter);
+app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
