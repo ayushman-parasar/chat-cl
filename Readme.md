@@ -1,5 +1,4 @@
 ## Steps
-
 - git clone git@github.com:ayushman-parasar/chat-cl.git
 - cd chat-cl
 - npm i
