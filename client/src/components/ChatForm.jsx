@@ -21,8 +21,8 @@ class ChatForm extends React.Component {
       .then((data) => {
         console.log("data", data);
         this.setState({
-          message:''
-        })
+          message: "",
+        });
       });
   };
 
