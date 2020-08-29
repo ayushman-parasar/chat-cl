@@ -10,6 +10,10 @@ var messageSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  sessionId: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Message", messageSchema);

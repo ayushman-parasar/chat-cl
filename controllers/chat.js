@@ -3,16 +3,19 @@ const Message = require("../models/Message");
 
 exports.sendMessage = async (req, res, next) => {
   try {
-    // console.log(req.body.message, "requeest");
+    console.log(req.body.message, "requeest");
     const msg = req.body.message;
     const content = req.body.message.msg;
+    let path = req.body.message.path.split("/").join("");
+    // console.log(path, "path");
 
     const newMessage = await Message.create({
       content,
       student: req.body.message.student,
+      sessionId: path,
     });
     if (newMessage) {
-      GlobalSocket.io.emit(`RecieveMessage`, msg);
+      GlobalSocket.io.emit(`RecieveMessage${msg.path}`, msg);
       res.json({ success: true, msg });
     } else {
       res.json({ success: false, error: "Message not created" });
