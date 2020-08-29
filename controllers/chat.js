@@ -15,7 +15,8 @@ exports.sendMessage = async (req, res, next) => {
       sessionId: path,
     });
     if (newMessage) {
-      GlobalSocket.io.emit(`RecieveMessage${msg.path}`, msg);
+      console.log(msg.path);
+      GlobalSocket.io.emit(`RecieveMessage`, msg);
       res.json({ success: true, msg });
     } else {
       res.json({ success: false, error: "Message not created" });

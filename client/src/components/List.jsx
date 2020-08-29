@@ -20,7 +20,7 @@ class List extends React.Component {
     });
     socket.connect();
     console.log(socket.connected)
-    socket.on(`RecieveMessage${window.location.pathname}`, (msg) => {
+    socket.on(`RecieveMessage`, (msg) => {
       console.log("checking conncetion");
       this.setState({
         allmessages: [...this.state.allmessages, msg],
