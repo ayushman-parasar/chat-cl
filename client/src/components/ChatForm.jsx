@@ -15,7 +15,7 @@ class ChatForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("payload",this.state.message)
     axios
       .post("/api/v1/chats", { message: this.state.message })
       .then((data) => {
