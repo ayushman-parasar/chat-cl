@@ -10,6 +10,9 @@ var messageSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  stdName: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Message", messageSchema);

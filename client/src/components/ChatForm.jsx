@@ -9,6 +9,7 @@ class ChatForm extends React.Component {
       message: {
         student: true,
         msg: "",
+        stdName:"xyz"
       },
     };
   }
@@ -32,6 +33,8 @@ class ChatForm extends React.Component {
         message: {
           student: false,
           msg: e.target.value,
+          stdName:"xyz"
+          
         },
       });
     } else {
@@ -39,6 +42,7 @@ class ChatForm extends React.Component {
         message: {
           student: true,
           msg: e.target.value,
+          stdName:"xyz"
         },
       });
     }

@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import "../../public/stylesheets/style.css";
 import axios from "axios";
 
-const socket = io();
+const socket = io(); //
 
 class App extends Component {
   constructor() {
@@ -20,15 +20,7 @@ class App extends Component {
         allmessages: [...res.data.messages],
       });
     });
-    // fetch("/api/v1/chats", {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data, "data");
-    //   });
+
     socket.connect();
     socket.on("RecieveMessage", (msg) => {
       this.setState({
@@ -61,7 +53,7 @@ class App extends Component {
 
                       <div className="msg-bubble">
                         <div className="msg-info">
-                          <div className="msg-info-name">STUDENT</div>
+                          <div className="msg-info-name">{incMsg.stdName}</div>
                           <div className="msg-info-time">12:45</div>
                         </div>
 
