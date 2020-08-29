@@ -9,7 +9,7 @@ class ChatForm extends React.Component {
       message: {
         student: true,
         msg: "",
-        path: window.location.pathname + "science-session"
+        path: window.location.pathname 
       },
     };
   }
@@ -33,7 +33,7 @@ class ChatForm extends React.Component {
         message: {
           student: false,
           msg: e.target.value,
-          path: window.location.pathname + "science-session"
+          path: window.location.pathname
         },
       });
     } else {
@@ -41,7 +41,7 @@ class ChatForm extends React.Component {
         message: {
           student: true,
           msg: e.target.value,
-          path: window.location.pathname + "science-session"
+          path: window.location.pathname
         },
       });
     }

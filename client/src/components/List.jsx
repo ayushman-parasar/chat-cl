@@ -3,6 +3,7 @@ import ChatForm from "./ChatForm";
 import io from "socket.io-client";
 import axios from "axios";
 import "../../../public/stylesheets/style.css";
+import { withRouter } from "react-router-dom"
 
 const socket = io();
 class List extends React.Component {
@@ -13,7 +14,7 @@ class List extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get("/api/v1/chats").then((res) => {
+    axios.get(`/api/v1/chats${this.props.location.pathname}`).then((res) => {
       this.setState({
         allmessages: [...res.data.messages],
       });
@@ -99,4 +100,4 @@ class List extends React.Component {
   }
 }
 
-export default List;
+export default withRouter(List);

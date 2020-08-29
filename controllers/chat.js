@@ -7,7 +7,7 @@ exports.sendMessage = async (req, res, next) => {
     const msg = req.body.message;
     const content = req.body.message.msg;
     let path = req.body.message.path.split("/").join("");
-    // console.log(path, "path");
+    console.log(path, "path");
 
     const newMessage = await Message.create({
       content,
@@ -31,8 +31,9 @@ exports.sendMessage = async (req, res, next) => {
 
 exports.getMessages = async (req, res, next) => {
   try {
-    let messageArray = await Message.find({});
-
+    const { sessionId } = req.params;
+    let messageArray = await Message.find({ sessionId });
+    console.log(messageArray, "message arraay");
     if (messageArray) {
       res.json({
         success: true,

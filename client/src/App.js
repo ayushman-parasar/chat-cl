@@ -10,11 +10,11 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/science-session">
           <List />
         </Route>
         <Route exact path="/test">
-          <Testing />
+          <List />
         </Route>
       </Switch>
     );
