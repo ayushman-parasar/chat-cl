@@ -20,6 +20,9 @@ class ChatForm extends React.Component {
       .post("/api/v1/chats", { message: this.state.message })
       .then((data) => {
         console.log("data", data);
+        this.setState({
+          message: "",
+        });
       });
   };
 
